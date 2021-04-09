@@ -20,15 +20,16 @@ arNXMVault_calls AS (
     FROM
         armor_fi."arNXMVault_call_deposit"
     WHERE
-        call_success = TRUE
+        call_success -- = TRUE
     UNION ALL
     SELECT
         call_block_time,
+        -- :todo: may need adjustment
         - "_arAmount" / 1e18
     FROM
         armor_fi."arNXMVault_call_withdraw"
     WHERE
-        call_success = TRUE
+        call_success -- = TRUE
 )
 SELECT
     date_trunc('day', call_block_time),
