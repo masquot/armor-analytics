@@ -6,7 +6,8 @@ WITH arNXMVault_evts AS (
         "wAmount" / 1e18 AS amount
     FROM
         armor_fi."arNXMVault_evt_Deposit"
-    UNION ALL
+    UNION
+    ALL
     SELECT
         evt_block_time,
         - "wAmount" / 1e18
@@ -21,7 +22,8 @@ arNXMVault_calls AS (
         armor_fi."arNXMVault_call_deposit"
     WHERE
         call_success -- = TRUE
-    UNION ALL
+    UNION
+    ALL
     SELECT
         call_block_time,
         -- :todo: may need adjustment

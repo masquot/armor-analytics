@@ -7,10 +7,9 @@ proxy: 0x1337DEF1FC06783D4b03CB8C1Bf3EBf7D0593FC4
 implementation: conflicting information?
 > 0x0db5f5f18622bfdf6c36243c23e44753e4432d42 according to implementation field when looking up via Etherscan: https://etherscan.io/address/0x1337DEF1FC06783D4b03CB8C1Bf3EBf7D0593FC4#readContract
 > 0x7eFf1f18644b84A391788923d53400e8fe455687 according to README.md from https://github.com/ArmorFi/arNXM 
-
-previous-implementations: ? [ , ]
 verified-on-etherscan: YES
-available-in-dune: YES
+available-in-dune: INCOMPLETE
+previous-implementations: ? [0x29B0734961B8682594F0DBb03D7CE2550fddCa8d,0x7eFf1f18644b84A391788923d53400e8fe455687]
 
 ## ReferralRewards
 proxy: 0x1337DEF1C79053dA23921a3634aDbD12f3b748A5
