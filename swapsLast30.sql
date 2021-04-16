@@ -50,13 +50,28 @@ pools AS (
             stakepool_address
         )
 ),
+fourteen_days_ago AS (
+    SELECT
+        date_trunc(
+            'day',
+            (
+                SELECT
+                    NOW()
+            ) - INTERVAL '13 days'
+        ) AS start_date
+),
 prices_short AS (
     SELECT
         *
     FROM
         prices.usd
     WHERE
-        MINUTE > '2021-01-15'
+        MINUTE > (
+            SELECT
+                start_date
+            FROM
+                fourteen_days_ago
+        )
         AND symbol IN ('WETH', 'WBTC', 'DAI')
 ),
 swaps AS (
@@ -67,28 +82,34 @@ swaps AS (
         - "amount0Out" / 10 ^ 18 AS armor_amount_out,
         "amount1In" / 10 ^ t.decimals AS token_amount_in,
         - "amount1Out" / 10 ^ t.decimals AS token_amount_out,
+        ("amount1In" + "amount1Out") / 10 ^ t.decimals * p.price AS swap_usd_value,
         evt_block_time
     FROM
         uniswap_v2."Pair_evt_Swap" uni
         LEFT JOIN pools ON pools.liquidity_address = uni.contract_address --    LEFT JOIN prices_short p ON p.minute = date_trunc('minute', evt_block_time)
-        --    AND split_part(pools.pair, ':', 2) = p.symbol
+        LEFT JOIN prices_short p ON p.minute = date_trunc('minute', evt_block_time)
+        AND split_part(pools.pair, ':', 2) = p.symbol --    AND split_part(pools.pair, ':', 2) = p.symbol
         LEFT JOIN tokens t ON split_part(pools.pair, ':', 2) = t.symbol
     WHERE
-        evt_block_time > '2021-01-01'
+        evt_block_time > (
+            SELECT
+                start_date
+            FROM
+                fourteen_days_ago
+        )
         AND uni.contract_address IN (
             SELECT
                 liquidity_address
             FROM
                 pools
-        ) -- for testing   AND t.symbol = 'WBTC'
-    ORDER BY
-        evt_block_time DESC
+        )
 )
 SELECT
+    date_trunc('day', evt_block_time),
     pair,
-    SUM(armor_amount_in) + SUM(armor_amount_out) AS net_armor_change,
-    SUM(token_amount_in) + SUM(token_amount_out) AS net_token_change
+    SUM(swap_usd_value) AS "Daily USD Swap Volume"
 FROM
     swaps
 GROUP BY
+    date_trunc('day', evt_block_time),
     pair
