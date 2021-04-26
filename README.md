@@ -39,7 +39,7 @@ Most base queries as well as the python scripts are available in this repository
 - [x] we will need a stats dashboard for arCore utilization as well: how much cover available for each protocol; how much is being utilized etc 
 
 
-## Review Data Quality Item list
+## Review Data Quality of Contracts in Dune Analytics
 
 I went over all contracts on Etherscan, and made sample tests in Dune Analytics. The results of this work are documented here in the files 'armor-contracts-overview.md' and 'armor-contracts-dune-tests.md'.
 Here is a simple Dune test dashboard so you can get an idea of my work:
