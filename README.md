@@ -1,9 +1,47 @@
 # armor-analytics
 
-## Work Summary
+## Dashboard Ouput
+
+- https://duneanalytics.com/armor/Armor-Testground
+    - Proposal for new main Armor dashboard
+    - includes key stats and charts
+    - awaiting team feedback
+
+- https://duneanalytics.com/masquot/Armor-Testground
+    - arCore stats based of python script output to SQL
+    - arNFT staking stats Jan + Feb 2021
+    - arNFT cover stats and totals
+
+- https://duneanalytics.com/masquot/Armor-and-Nexus-Mutual-Testground
+    - stats and charts related to NXM staking
+    - arNXM, wNXM token supply stats
+
+- https://duneanalytics.com/masquot/Liquidity-Providers-Testground
+    - Liquidity provider stats Uniswap for ARMOR pairs
+    - Work halted because of lower priority
+
+
+## Code Ouput
+
+Most base queries as well as the python scripts are available in this repository.
+
+
+## Work Items
+
+- [x] Total arNFT staked on arCore (by coverage, and by purchase cost)
+- [x] NXM staking rewards received per week
+- [x] arNXM:NXM ratio
+- [ ] LOWER PRIORITY trade volume and liquidity of all Armor and arNXM LPs
+- [x] NXM staked per contract
+- [x] NXM waiting to be unstaked from each contract
+- [x] Unlock schedule (30 days after unstaking) of the NXM (how much NXM will be unlocking when, from which contract)
+- [x] Would also like to see ETH versions of the charts we already have in dune
+- [x] we will need a stats dashboard for arCore utilization as well: how much cover available for each protocol; how much is being utilized etc 
+
+
+## Review Data Quality Item list
 
 I went over all contracts on Etherscan, and made sample tests in Dune Analytics. The results of this work are documented here in the files 'armor-contracts-overview.md' and 'armor-contracts-dune-tests.md'.
-You can also find some of my SQL queries in this repo. As you can see, I use `WITH` statements to make the SQL more readable and maintainable.
 Here is a simple Dune test dashboard so you can get an idea of my work:
 https://duneanalytics.com/masquot/Armor-Testground
 
