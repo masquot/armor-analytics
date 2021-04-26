@@ -31,7 +31,7 @@ FROM
 WHERE
     staked > 0
 ORDER BY
-    staked DESC
+    purchased DESC
 """
 
 with open('arcore-sql-output.txt', 'w') as w:
